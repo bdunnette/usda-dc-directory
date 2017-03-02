@@ -30,18 +30,22 @@ request.get({
     jar: j
 }, function(err, httpResponse, body) {
     var $ = cheerio.load(body);
+    console.log("Getting session variables...");
     $('#frmData > input').each(function(index, input) {
         postData[input.attribs.name] = input.attribs.value;
     });
+    console.log("Fetching directory...");
     request.post({
         url: url,
         jar: j,
         form: postData
     }, function(err, httpResponse, body) {
+        console.log("Parsing...");
         var $ = cheerio.load(body);
         var directory = $('table #header');
         cheerioTableparser($);
         tableData = directory.parsetable(true, true, true);
+        console.log("Building array of contacts...");
         var contacts = new Array;
         tableData.forEach(function(col) {
             // Make column headers more JavaScript-friendly...
