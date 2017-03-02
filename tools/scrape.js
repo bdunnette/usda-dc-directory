@@ -38,9 +38,10 @@ request.get({url: url, jar: j}, function(err, httpResponse, body){
         // console.log(httpResponse);
         // console.log(body);
         var $ = cheerio.load(body);
-        // console.log($.text())
+        var directory = $('table #header');
+        // console.log(directory.text())
         cheerioTableparser($);
-        tableData = $("table").parsetable();
+        tableData = $('table #header').parsetable(false, false, true);
         console.log(tableData)
     });
 })
