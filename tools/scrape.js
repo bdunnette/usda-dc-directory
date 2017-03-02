@@ -1,15 +1,46 @@
-var cheerio = require('cheerio')
-var request = require('request')
+var cheerio = require('cheerio'),
+    cheerioTableparser = require('cheerio-tableparser'),
+    request = require('request');
 
-function gotHTML(err, resp, html) {
-  if (err) return console.error(err)
-  var $ = cheerio.load(html)
-  var contentTable = $('table.tablebox');
-  console.log(contentTable);
-}
+var j = request.jar();
 
-var data =
-'__VIEWSTATE=4cDfBWqY2Tdu%2F4hI%2BXirSQ9vU%2FctsdbXzqhoXu2opuRwpArqsXngWiFn29O53vfOKVNRKdzgNLJ2418%2Bp8v%2FkHtg6gGsXpl2eavX4ij3mWkSAfNIWFYSoCzsJ9wu2hCHNWKmBQZp5UV1GzH%2FNlcpVmST9c3DOQEnEvArUnnVvmH1JJBc8M4M%2FfLqw%2B5GALvQvwABOFw9quNMNOV4kHnKehlXm83E4OJ6O8NQ2n7yLDqxDEtjaMLjn2Qs5u8nsY6qfBiZBYFCZ4id4EXIgKaRXwnHFOZ35WQctBCa4BH7c7uG0MD%2BIS8W1LfxA337tNqv2wiyUY2fiN4Z86npUlD6zDmjCpBXcQvd6DEJHjIbptteaCpD0i%2Biwwa0zW4DLTIzRP9qhegi8wjU6tpa9WE8aRhfUdngdAprKRiFcTPb2ao%2FpfOygqxqNWvHxPQXmo7kh6L8zZ7FKxAlbrjzmJ5V%2B%2BaWf8HyQ7IFD8eq%2FljRJZeqHzHjleAHtv88jHCi5l%2F098xIsN%2FRE3tuo24X%2FCEgmxA5MKpTksCTCZe%2FP1iKdkOlWQ9O8gzYDUre%2B1j9GHXfX4aA6ewHrebjzoH2cTd7F8iuiRFYcAlIkQhKvownyqdAM6xH6MxoHeZXiM6DvH2LZiXJ7ENZBPuaAn%2BHwBb%2BuEmAoKabQqiYFCMYj3vhjNg59mWlSK1vwyXUDRY8lq%2Brz%2BdZUTmMHV%2Fu3lyXTIUfV0hwy3U82XH7eG4rJ7uKvDb3QDaDU6VPLpocORmM%2Bv1rb%2F72%2FKJlySzYzZzjRlBbGbrmfkBI1sI3Saa0hsue3cBZiWFhUyiWMV3S0ZCzwIbwwXDCaSjQPHzJVx1wL3zuc1rFgimCPTsTRItKgXsg3fbdhayYLUc89D0jG29S%2BUyuNh2ndOwvnOSgeOXa0a2wIPLKc%2FF%2BmsgfnR%2FU94hZ69x7B0rDmJVX%2FmAJ7pFuHzs7TDUbRuJDoGkKUsG7klyFi14QX0aLxL2gMtgXj2vFEKSVkfISG%2F%2FI1x5Y%2FImQANYRHCtK8xtY%2FihIcMlxbU3lJ2dbAKwLTA%2FSnoVS33jwG6N%2FPDk1f9qWcWh4LnLngXEAKuF%2FABq8dh%2FUVHfI8sGDgPEVpYuCB%2B%2FY8a9IpoZ3ZUoglAM4AsS8f3OY6kmoi19EUoh9%2BZdCoE4FHgHOXui%2B6%2BNf7znF14oo%2FpnHh1ilEZ7oqhavCPMXBOa93C5gX1zxE5WRYJtPcU86nnZrUSanwIRpPCmWJQJ%2Bf%2FzctHLV4L7W0rm06PZlih03qVHo2adia1nAcPo%2Fou%2FX0dI1J9aRH6%2B1NZYvWnBiYDFjZdPpB9thDGcm%2F5odJOUPFvyPggn8EWcKEghT5zjGozyxOeoB%2BSJlOkvlj6WWgFhFg2bOFbNHmesFT7awrhW%2B9XPGIKQ39jV0DldFwzaPqYB94Kuq0ucwQycPT2cstnfu8%2FAy5DApIND6yhJ%2FCw%2FJh2TWRYba5gtwoyo0h5%2FBHNzlA6NXUdzY%2BXReRk%2BgeCIA9%2BjMVDHjEugLU4Qik1sDVqSUGbklDMvFMGgsY6kwYfERkczrWBLh3trb5eyqzohVTkrfVkZbmND9wX1fzl2Hg2v1LnOwVX29Bsvda9pNUNqrNR1W%2FZv8s7S4nofr2VOGP65xPHjDqgJg4NV8OcY8Swkpe0hCHYorefZv8D%2Fu5T0DZzK79tF8cYJD%2FQjFuYIRvZCEiXzwPFxDzUnoH4aO3Aj6m9Ur6dHSUa6KkCXwDWeAUi0PBENazohGEqBmgQv7FGMV%2BX%2BAHB%2FDxi5n3mYdioblRwIlXd9HFICAMZ1HF8uzCSiHH1wKQULZOxkQSRrKgx857hbilSghcikifVVFNAYPqaxb%2BKZHgFYXR2sosuj4X%2F%2Bg40OXQqUnO3i%2BKeUin6MIZzxFDjpK%2F6jmz9JO37brG7jnLMokRbp7xj4cte7ZIDVSEh8AJZ2f2FbT0ru5DufEBqqdTfejQTqa1M%2FNPzs7emLLsnCMiaJtK6NT%2FqVF7sA%2FoRAX6T6%2F3f3ZWfq1S%2F2vvY2dK%2B20ZNQAau8YQqouKkrcd4hIYCOyvfzc4hl7Qmq%2Bo04i7s0b5XilH%2F4BqoO1DGW2gWyYhQRS8FslKjLjKPA1hz2If9J6jeJohuip2bh43HAR8UTPMILQrDEU2zsGQgAuJtjUoMzm38%2B7A3pY6CbkqcSMOfwqIRS8GKdzaV3ZZ4dldTpMdz0zmVOYndi5F%2BDDvEwXM2nsiBMovz79jYYHNcktPoVwJ9%2BbrZe6sJP5zdr4bKdbJCtMtN9xi3vUDT%2Fqp9D3%2F%2BgsAx%2Fg46WEdypZNjnKp23Mb%2Fe6ctd2NHTDqwp8D%2FFM4wnFTfK8uS%2FX7xUlhZibG%2B0PPM2wIe87BC1ysA7Vvo9OhpT%2B82itiwmTxtP50ArDrbpEbxFkDBDz7eU0HX0KpCOiyYFAoTjvOx9y6XJeJcn6rABiSHqTcSc%2BCl0o01H7%2Fg0YE%2F3ZapKE2QyNNuJPfEspTGqfyIsMvOhejH0AslCXCdScGyxMlNrnZFkV6aQgUjkyxAyFC7faqdCODRfyAB0UBsqQxwno%2BWJr5HeHh218ZmNgkJtRlmtFpdK8wGTJr%2B9VJ%2B9EyAIuu5h%2F%2Brsr%2FOfg1LICEDv5cxSywjYVR7s5%2Fl26YLBd67orm2VTLoxgZE948YKt%2Bos%2BhTxa7p9aaRL9OqU6EEGRo8Enk1hDOGQfNyTR1uVfFBOqz9qZoPairi9lH7GFtGlbO7M5wkZUO6Y3jlvO3B%2FkW6m5PXBPoCW8n3FO8aA2C0rmmidXXjqS9GhsO00%2F4uoeW0AkOAiGl0s5G5zHpdkrogSAkDR4FX55HLRBnMVqPD7o8UvuGRm9Ueicjv9Ah86EwtcjASHUVA%2FkFaeNFcPoMJ%2BnupjX2NLy%2BDXcwxPU4MXq%2B2Iax5wyKKdovYTsMeR1hDErTl864Uy2na16gpM3IGh9GP8kYgXigVcWmrRCUn5M4WExWAg99gwfGQvKoq%2BGFyNnegJmfIP4L8Y2VzoYip14K%2FgvuqXI8m5maYZTwX20lW83WxrchfEOqiZmO9KEF%2BkBpyyI0mUqOSBRVgw6aZiXg8JwHopdSxABZ2zfkbQfj7sfzv%2FlFfpS0FWNc39FuZrXQ4ixP9HT5plQ5te9eQjoF%2B7Wc1RQQUDVq8u%2BKsjo19RmiDDLe5%2F0s7LVtk1pvS5f9T167ExvMbnw3J2lUQlrFI3EZBBnxCmo6pYLC7%2FGjYrlF9dXhaSRA0NzvoWLsaU0GFY3%2BG%2BxT2Y%2FgWNj972TfpZ5sxoXZfLGn5MkYSjtHEg2AOPKqVit0ONbQQE20hN5PF7QcvkKvhoDDNcVXrLB3zCp37LFyZjcLdUDDmxSdnxIKXuycghWtDVhL59ei2DqiouWLovNBcpKF8eEhszVdKDXPQy%2BE1ad4zPeEgr9MRies8ssQFP75STosH5wteoTeSWcJRXKhoVOidXmpJcbYHHWq7VH0XIsiIibq3HVsgLSwkHHewsZmofhwqt65Duinq4Yf%2FLwFScfXqhM1Tp9K4wMGYtkhydfodB9ytr1TbBNP7heAlyh4MzD9HiitPU5y%2BbfJR3XMJI9cIWk%2BPY6Dj4c18C9gqA4kGAaaEL%2FtD4dUVxOQPGwNgRjL6SrT2QnFgdoGFa6LKXa5VJ6XXKXXGB%2FoPmN0k4ie6VSe2hUmD2VdAHn0yWPEEJTwea0BhXPlxKw4qSwD2rkOI2WBov2pZCuhukIvUz40f9lir%2B%2F%2BFz5yF2nuSZ1mugpb4LrwpilRLFHqGP2hsZiXKSgDQlxEdwsghHPdjKmmsi7lsZPUzImUIvxRVq3VIBckF3vUepbXYYx8L8kuG4%2B8MPH8wGSJvJ7jlCUuhH27oTFX8lewop08oJONp%2FqS3Uey%2Fklm%2FRQk7gjjD9s%2BHtRoW7BH3bGFnCyhLl09Gc804focZey4ITxMOyfzPZT7hEfXpSqn4H4kgD2XLT5rumYLBLjyhY0kJCn55akS21Cut5OSb70WT2%2Fou62L0n355%2BIytUmzk%2FgeOP2UKS0LwgAkqCNFTxdh%2FDEMcZa4aeOit9XKDzKnoBJdncmIS%2F9so8N0pxPzKLXPJW1ep5fne%2F%2BIWwEjn6wQRJZR9mrCMVjsVSllw3tf7wqqbLzqB%2BYI0JOMX6Y3blakNxYacS4b7h9iTuOhtrOnKNoHA2ZNptVZTX6X0BDUb6QeN3%2BKNVK1KlknGxrtxSK9stnaU5a0y5Ey1VermBdyT7kt81E00DxIM1%2F6wRYIT4BLtFu8v8%2BGuuL%2B4TkduRqd9S8tPkMs%2BDXy7rwZJONsyM4IG62RBO9%2FweGeodqHJuDZtcAaTZJQlnM1gGBm7e96I9lplu0fVRLcGbLtETKwWQTqUZxdHTYmqyXNr6HTLW3bfXJNCPsDn6TC6dIbpeqp2qBYkvv%2F2iC6p%2F6IA3%2FYK4BclOIcTlPiV8VA7d1LK4fIrg1hbHJ8JU0pgpNkBQTYTRIR300H%2Fq9SB6QCU2MVxpXT0%2Fi%2BeRbYkP8bmKQG%2FDByaVNocFi7Gxkxg%3D%3D&__VIEWSTATEGENERATOR=00578275&__SCROLLPOSITIONX=0&__SCROLLPOSITIONY=0&__EVENTTARGET=&__EVENTARGUMENT=&__EVENTVALIDATION=zS7jorhnLrWSj9lT0UoTqDYXFmYN5v8S%2F1Dx9qOGr2JBNMDiRQEf1KPJkpn9IbxkuKP%2FKfWDMg%2F6G%2F79WHR5d7z50wkEqVrXsgxeXZNKFRfpIlLhGXo6p14E4nwCZslKDTp7iO6Q%2FPpWXtKnEK6pZMyohQ92ZviuuCqHp5CCauJ08z3QAnauzmaFzn8QTyX83mxkI%2FYAyZWggtuaNQbMs8FXtj%2FKbPxcH4J3UOai6qZhDQTsxG0lqmBTQsWvnFI2hfr7PF9J1Rs2S%2F7OmwOtW%2FD7OIw4ob2HEyl3MD%2BR%2BJzbuzcN2eNULomN8eLqm5avMVu%2FUharnbqWTBhOrczyFaZXn7rQl9paBoyINaP7gn8xLrerwundC7QpavngCmLWm6Rv8GNY4gTwfC0zU3K3jvufnuRMWmBbKN4vQHQgrwdeEYQZ8A4eJPXJIMDf7NbUe8XH54MMhBLBVklzcxsEmgqvKtUSrmrLepKAXfZU72jE87pSoPL40pelapsBdstxAi4to8ajzLZX%2FXLEyLnxuX0uxLqrPmOgIozLM4aUIMyssufannOhLl%2FaxUvJM4eaxxR188H%2FaAcOEpGeO%2Bt99vRN2YBTAWT2E%2BQpdiEQoU%2FzdAhrv2NGiX4SeUDy2ebM6kXIwL3QdG%2B997vdNyJGQ4X%2FL289ni2Flswzu3A7wrev65kiyiN%2FI6QnRpevghTtRR9sgoXTlIMyJKU2hKKz4WgACfVG1f2NZS%2FqFIf0JA7BMJFDpr0f5t9OjCBpmTsP9Cjp35fVpG6h2UZzmy2rkqrRkSlPxUOlUEMRHXLqKpv6Kcn9fe%2BCempSTmvqvAVDvdVoJhhiQ4%2FMWzoro9Sn%2Fj6vlbIGbrOV1Nr0wltA7tgJpeW5ghz0KkGC9Lod0rwfX%2F4gNUY2AvKqD7cpjmLWYRRC2wHU%2BPeOak0cSxv5hltcmMAUGkNzn3uvSlx%2Fgv%2Bb6Ocs0jtlg3LFh6NxqdWikZLt5aw8xAkkIMrU4K56Dfknu9eIHl%2F1A%2FX88kW4dM%2BYTQI%2F5p3iMkjeWoOGlZm05n5%2FVGR%2FFMfkX6ctGpiwGbUV38TMKljcVxyZyhF4JQH5UhMTtfAqgb%2FBlH8pJcfz6C%2FcKA8dXniqb2Lx317s572BP2sSMsU081aJ6enPJjuob%2F55V0pmaBTztRNeq2synkU2VYYpajHxWP88vF%2FmShDpga7PfqxTZD2iHRO1zm3Ppl%2F45PRQ1Ow2g7OTCMWLsubPHQ0a5%2Bm%2FSjQf%2BlW8G6NlmVBbnc4Ql4nIwSl02ofuBLpHq1sYmtcUcOQ0eNVsxG7lOaHp84btNr3XzEHi2GDpdlRsg6svdWMHvUme2cdCjrZ%2B%2FxRlXyrQCr0uARr5xPnXRLCyX2W9wCY0a%2BdtByWrHvtG&txtLastName=&txtFirstName=&txtPhNum=&cboAgency=&cboBuilding=&cmdLocate=Locate'
-var domain = 'https://dc-directory.hqnet.usda.gov/dlsnew/phone.aspx'
-request.post(domain, gotHTML)
+var postData = {
+    txtLastName: '',
+    txtFirstName: '',
+    txtPhNum: '',
+    cboAgency: '',
+    cboBuilding: '',
+    cmdLocate: 'Locate'
+};
 
+// console.log(postData);
+
+var url = 'https://dc-directory.hqnet.usda.gov/dlsnew/phone.aspx'
+
+request.get({url: url, jar: j}, function(err, httpResponse, body){
+    console.error(err);
+    // console.log(httpResponse);
+    // console.log(body);
+    var $ = cheerio.load(body);
+    $('#frmData > input').each(function(index, input){
+      // console.log(input);
+      // console.log(input.attribs.name);
+      // console.log(input.attribs.value);
+      postData[input.attribs.name] = input.attribs.value;
+    });
+    // var cookie_string = j.getCookieString(url);
+    // console.log(cookie_string);
+    // var cookies = j.getCookies(url);
+    // console.log(cookies);
+    console.log(postData);
+    request.post({url:url,jar:j,form:postData} , function(err, httpResponse, body) {
+        // console.error(err);
+        // console.log(httpResponse);
+        // console.log(body);
+        var $ = cheerio.load(body);
+        // console.log($.text())
+        cheerioTableparser($);
+        tableData = $("table").parsetable();
+        console.log(tableData)
+    });
+})
