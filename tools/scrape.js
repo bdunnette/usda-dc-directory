@@ -47,9 +47,12 @@ request.get({
         tableData = directory.parsetable(true, true, true);
         console.log("Building array of contacts...");
         var contacts = new Array;
+        // For whatever reason, cheerio-tableparser outputs an array of columns
+        // We'll convert those back into rows, using the first row as headers
         tableData.forEach(function(col) {
             // Make column headers more JavaScript-friendly...
             colHead = col[0].replace(' ', '');
+            // Don't save header-less columns
             if (colHead) {
                 col.forEach(function(val, idx) {
                     if (idx && val) {
@@ -67,8 +70,9 @@ request.get({
         jsonfile.writeFileSync(jsonFile, contacts2, {
             spaces: 2
         });
+        // Generate CSV from our JSON contacts array
         var csv = Papa.unparse(contacts2, {
-            quotes: false,
+            quotes: true,
             quoteChar: '"',
             delimiter: ",",
             header: true
