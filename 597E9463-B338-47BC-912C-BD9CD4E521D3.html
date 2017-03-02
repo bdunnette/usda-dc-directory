@@ -1,0 +1,320 @@
+
+<html>
+	<head>
+		<title>The USDA Telephone Directory</title>
+		<link href="common/phone.css" type="text/css" rel="stylesheet" />
+		<link href="common/jquery.autocomplete.css" type="text/css" rel="stylesheet" />
+		<script src="common/jquery-1.3.1.min.js" type="text/javascript"></script>
+		<script src="common/jquery.autocomplete.pack.js" type="text/javascript"></script>
+		<script>
+		$(document).ready(function(){
+	        var data = "Core Selectors Attributes Traversing Manipulation CSS Events Effects Ajax Utilities".split(" ");
+            $("#txtLastName").autocomplete("AutocompleteData.aspx",{extraParams: {f: 'lname'}});
+            $("#txtFirstName").autocomplete("AutocompleteData.aspx",{extraParams: {f: 'fname'}});
+            $("#txtPhNum").autocomplete("AutocompleteData.aspx",{extraParams: {f: 'phnum'}});
+
+          });
+          </script>
+	</head>
+	<body>
+	<div id="content">
+        <div id="header_image">
+                <img src="common/images/agheader.gif">
+	
+		<form name="frmData" method="post" action="phone.aspx" id="frmData">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="00578275" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="EEIl9O762vJ9qaWF+DSi8RMoVWPoYcAatHVp6UsKLLmp+sum+TNaxZV1w8S+Y9Wa+2/jicmNvxr9JEy0b++JUHFLCAmD8cHoCm2EUsxqvT4iec0AYL5SzSLyYlEKNcisGTmTLCNrs1Qjtqt2uL0Y17C/yA/QhMm6pyPbeKvFrUChhZ213jfjhOPTZRgNfQ4KudFxslpMRwbp6kcolfNGeLZdWvVWoojRgs/O6+/IAwArGMZnCHNW8V/nHIVMLP7Zxv08H6uq/by4UCuDCLZbA7vNeYCU/TFhLRsCiVWHlcmcXJLiP9Mr8IE8CbW9CyDurU8Jn3OKPYrIjsQx3zAL7HVdK90TXs43DXllEI43Ljq8++OrhfBg9L4aipp9R9soKxPmZLkO3kUo6FwA21l1x2S/4AAwBmrKsOXdXAcaG2iYLTe8DBDbtOJsNXFViO1/inb8tcSh/BE1Y5x4NcEQmUId5iqXJKn7iNzKVj7LgIXZTwisnHc+HWj8FtHFKhLreWK8OyqVNCx3MU0teD83mTUGeS6zoEoGGGyNjCX3y3L6umfOqDvTD/JIvWYUgBQlukwxQN4I4ozMwED9juxnFYbWe4URw10XVNej4FJ/ljawIr0KtkfuYX9QB5ElrCN8ffaO2m9ffdyHsoaHJK6R73fQIc2ZGHA6mMc+i1T9fyzo/SfTKZR7YRB4U5SsAo2Ek+3iVZ36SwNgeKBnY2taRdIbioK58w4mU4lZSmb/oiBoCDbBK/iOvr6y8evSuZWjG81iHDP2iBZtIhKj6uDgqP5pboo3MLdDOEMK8pfxDht6ag7clNsowF+PFFBmiFIQ51hxBt7SWAIi4di4h5K+dhATcDkmYkcNdInLlDR55cMNb7TnIPdknKjB9WRgZ2zCGX3PDdV4yHeV30pm/eBKnEO8zgIHvkJ8tymCKQ+GfVTQEmd39gtBhNLGyI09Hrd8DcA3/J3jqxd3V7xmHIicH7o5Ir1lt+La0cqdfRnBrRM/A6rToDqUKiWbYtHcq2APjksrle40mcENjUIh1nA3vc4goLIfzU4BoDwc2BYPyGyJPqpAIryB0j6IbqtQMpmCwh+TknZGM0I4T8tK6Z0/bREinYBUhMIVUmKwVUXi2FxiWZfubM8xDuBpVOCY5uFFoaOEiUiOw+X/Z87MK5v86EKtpGEPZ9UBPEjosiTw4863PWBLK4Bq2s6G38t6+rM6v/rKyYdkXSemII4VSHWQDv83fqxf9ekX94u58jjOclFCMvBWyUus22QDGPi9990pNn2ETdVjtIe3yU0scWA6r39tHRdBSCJ6T90HtweYWAGgkYXKc06xCW32IHNPdsR27LFyahpOj52S+vlBWL35IDf4uXMXScUUQWFPraHVIcF2HTYt" />
+		
+		<table class="content_table">
+        <tr>
+            <td class="primary_content">
+            <h3>USDA Washington Metro Area Telephone Directory </h3>
+			<table class="tablebox" width="820px" align="center">
+				<tr>
+					<td colspan="6"><br>
+					</td>
+				</tr>
+				<tr>
+					<td width="10%">&nbsp;</td>
+					<td colspan="4">
+						Search on any of the fields below by indicating a value and clicking "locate". 
+						If you know part of the first or last name, enter the first few letters and 
+						proceed. Trouble using this application? Refer to <b><a href="help.htm">Help online.</a></b>
+					</td>
+					<td width="10%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan="6" align="center" height="41">&nbsp;
+						</td>
+				</tr>
+				<tr>
+					<td width="10%">&nbsp;</td>
+					<td width="5%">&nbsp;</td>
+					<td width="502">
+						<span id="lblLastName">Last Name: </span>&nbsp;</td>
+					<td>
+						<input name="txtLastName" type="text" id="txtLastName" /></td>
+					<td width="5%">&nbsp;</td>
+					<td width="10%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="10%">&nbsp;</td>
+					<td width="5%">&nbsp;</td>
+					<td width="502">
+						<span id="lblFirstName">First Name: </span></td>
+					<td>
+						<input name="txtFirstName" type="text" id="txtFirstName" /></td>
+					<td width="5%">&nbsp;</td>
+					<td width="10%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="10%">&nbsp;</td>
+					<td width="5%">&nbsp;</td>
+					<td width="502">
+						<span id="lblPhoneNumber">Phone Number: </span></td>
+					<td>
+						<input name="txtPhNum" type="text" id="txtPhNum" /></td>
+					<td width="5%">&nbsp;</td>
+					<td width="10%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="10%">&nbsp;</td>
+					<td width="5%">&nbsp;</td>
+					<td width="502">
+						<span id="lblAgency">Agency: </span></td>
+					<td>
+						<select name="cboAgency" id="cboAgency">
+	<option value=""></option>
+	<option value="AARC">AARC</option>
+	<option value="AMS">AMS</option>
+	<option value="APHIS">APHIS</option>
+	<option value="ARS">ARS</option>
+	<option value="CNPP">CNPP</option>
+	<option value="CR">CR</option>
+	<option value="DM">DM</option>
+	<option value="DM/MS">DM/MS</option>
+	<option value="DM/MS/Budget">DM/MS/Budget</option>
+	<option value="DM/MS/WCTS">DM/MS/WCTS</option>
+	<option value="DM/OO">DM/OO</option>
+	<option value="ERS">ERS</option>
+	<option value="ESRA">ESRA</option>
+	<option value="FAO">FAO</option>
+	<option value="FAS">FAS</option>
+	<option value="FNS">FNS</option>
+	<option value="FS">FS</option>
+	<option value="FSA">FSA</option>
+	<option value="FSIS">FSIS</option>
+	<option value="GIPSA">GIPSA</option>
+	<option value="HMMG">HMMG</option>
+	<option value="HSS">HSS</option>
+	<option value="NAD">NAD</option>
+	<option value="NASS">NASS</option>
+	<option value="NIFA">NIFA</option>
+	<option value="NOAA">NOAA</option>
+	<option value="NRCS">NRCS</option>
+	<option value="OALJ">OALJ</option>
+	<option value="OBPA">OBPA</option>
+	<option value="OC">OC</option>
+	<option value="OCE">OCE</option>
+	<option value="OCFO">OCFO</option>
+	<option value="OCIO">OCIO</option>
+	<option value="OCIO/ITS">OCIO/ITS</option>
+	<option value="OE">OE</option>
+	<option value="OEPNU">OEPNU</option>
+	<option value="OES">OES</option>
+	<option value="OGC">OGC</option>
+	<option value="OHCM">OHCM</option>
+	<option value="OIG">OIG</option>
+	<option value="OJO">OJO</option>
+	<option value="OO">OO</option>
+	<option value="OPC">OPC</option>
+	<option value="OPPM">OPPM</option>
+	<option value="ORACBA">ORACBA</option>
+	<option value="OSDBU">OSDBU</option>
+	<option value="OSS">OSS</option>
+	<option value="OUTREA">OUTREA</option>
+	<option value="RD">RD</option>
+	<option value="REE">REE</option>
+	<option value="RHS">RHS</option>
+	<option value="RMA">RMA</option>
+	<option value="RUS">RUS</option>
+	<option value="SEC">SEC</option>
+	<option value="WAOB">WAOB</option>
+
+</select></td>
+					<td width="5%">&nbsp;</td>
+					<td width="10%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="10%">&nbsp;</td>
+					<td width="5%">&nbsp;</td>
+					<td width="502">
+						<span id="lblBuilding">Building: </span></td>
+					<td>
+						<select name="cboBuilding" id="cboBuilding">
+	<option value=""></option>
+	<option value="100 RIVERSIDE PKY, FREDRICKSBERG, VA">100 RIVERSIDE PKY, FREDRICKSBERG, VA</option>
+	<option value="1099 14th ST NW">1099 14th ST NW</option>
+	<option value="1120 20TH ST NW">1120 20TH ST NW</option>
+	<option value="1255 22ND ST NW">1255 22ND ST NW</option>
+	<option value="1325 G ST NW">1325 G ST NW</option>
+	<option value="1800 M ST NW">1800 M ST NW</option>
+	<option value="1815 N FT MYER DR">1815 N FT MYER DR</option>
+	<option value="2000 M ST NW">2000 M ST NW</option>
+	<option value="2101 L ST NW">2101 L ST NW</option>
+	<option value="2175 K ST NW">2175 K ST NW</option>
+	<option value="8609 Sudley Road,, Manassas VA">8609 Sudley Road,, Manassas VA</option>
+	<option value="8700 Centerville Road, Manassas, VA">8700 Centerville Road, Manassas, VA</option>
+	<option value="AEROSPACE">AEROSPACE</option>
+	<option value="ANNEXBG">ANNEXBG</option>
+	<option value="B-001 BLTSVL">B-001 BLTSVL</option>
+	<option value="B-002 BLTSVL">B-002 BLTSVL</option>
+	<option value="B-003 BLTSVL">B-003 BLTSVL</option>
+	<option value="B-004 BLTSVL">B-004 BLTSVL</option>
+	<option value="B-005 BLTSVL">B-005 BLTSVL</option>
+	<option value="B-006 BLTSVL">B-006 BLTSVL</option>
+	<option value="B-007 BLTSVL">B-007 BLTSVL</option>
+	<option value="B-009 BLTSVL">B-009 BLTSVL</option>
+	<option value="B-010 BLTSVL">B-010 BLTSVL</option>
+	<option value="B-010A BLTSVL">B-010A BLTSVL</option>
+	<option value="B-011 BLTSVL">B-011 BLTSVL</option>
+	<option value="B-011A BLTSVL">B-011A BLTSVL</option>
+	<option value="B-012 BLTSVL">B-012 BLTSVL</option>
+	<option value="B-014 BLTSVL">B-014 BLTSVL</option>
+	<option value="B-030 BLTSVL">B-030 BLTSVL</option>
+	<option value="B-046 BLTSVL">B-046 BLTSVL</option>
+	<option value="B-046A BLTSVL">B-046A BLTSVL</option>
+	<option value="B-047 BLTSVL">B-047 BLTSVL</option>
+	<option value="B-049 BLTSVL">B-049 BLTSVL</option>
+	<option value="B-050 BLTSVL">B-050 BLTSVL</option>
+	<option value="B-052 BLTSVL">B-052 BLTSVL</option>
+	<option value="B-1002 BLTSVL">B-1002 BLTSVL</option>
+	<option value="B-1040 BLTSVL">B-1040 BLTSVL</option>
+	<option value="B-1043 BLTSVL">B-1043 BLTSVL</option>
+	<option value="B-1070 BLTSVL">B-1070 BLTSVL</option>
+	<option value="B-1120 BLTSVL">B-1120 BLTSVL</option>
+	<option value="B-1180 BLTSVL">B-1180 BLTSVL</option>
+	<option value="B-161 BLTSVL">B-161 BLTSVL</option>
+	<option value="B-162 BLTSVL">B-162 BLTSVL</option>
+	<option value="B-173 BLTSVL">B-173 BLTSVL</option>
+	<option value="B-177B BLTSVL">B-177B BLTSVL</option>
+	<option value="B-177C BLTSVL">B-177C BLTSVL</option>
+	<option value="B-186 BLTSVL">B-186 BLTSVL</option>
+	<option value="B-200 BLTSVL">B-200 BLTSVL</option>
+	<option value="B-201 BLTSVL">B-201 BLTSVL</option>
+	<option value="B-209 BLTSVL">B-209 BLTSVL</option>
+	<option value="B-211 BLTSVL">B-211 BLTSVL</option>
+	<option value="B-218 BLTSVL">B-218 BLTSVL</option>
+	<option value="B-228 BLTSVL">B-228 BLTSVL</option>
+	<option value="B-254 BLTSVL">B-254 BLTSVL</option>
+	<option value="B-262 BLTSVL">B-262 BLTSVL</option>
+	<option value="B-263 BLTSVL">B-263 BLTSVL</option>
+	<option value="B-264 BLTSVL">B-264 BLTSVL</option>
+	<option value="B-301 BLTSVL">B-301 BLTSVL</option>
+	<option value="B-303 BLTSVL">B-303 BLTSVL</option>
+	<option value="B-306 BLTSVL">B-306 BLTSVL</option>
+	<option value="B-307 BLTSVL">B-307 BLTSVL</option>
+	<option value="B-308 BLTSVL">B-308 BLTSVL</option>
+	<option value="B-309 BLTSVL">B-309 BLTSVL</option>
+	<option value="B-310 BLTSVL">B-310 BLTSVL</option>
+	<option value="B-318 BLTSVL">B-318 BLTSVL</option>
+	<option value="B-419 BLTSVL">B-419 BLTSVL</option>
+	<option value="B-426 BLTSVL">B-426 BLTSVL</option>
+	<option value="B-426A BLTSVL">B-426A BLTSVL</option>
+	<option value="B-431 BLTSVL">B-431 BLTSVL</option>
+	<option value="B-445 BLTSVL">B-445 BLTSVL</option>
+	<option value="B-465 BLTSVL">B-465 BLTSVL</option>
+	<option value="B-476 BLTSVL">B-476 BLTSVL</option>
+	<option value="B-580 BLTSVL">B-580 BLTSVL</option>
+	<option value="B-R1 BLTSVL">B-R1 BLTSVL</option>
+	<option value="BSC">BSC</option>
+	<option value="C GALLERYBG">C GALLERYBG</option>
+	<option value="FAIRFAXCBG">FAIRFAXCBG</option>
+	<option value="FRANKLIN COURT">FRANKLIN COURT</option>
+	<option value="GLENDALE">GLENDALE</option>
+	<option value="GWCC">GWCC</option>
+	<option value="LANDOVER">LANDOVER</option>
+	<option value="MNHBG">MNHBG</option>
+	<option value="NAL  BLTSVL">NAL  BLTSVL</option>
+	<option value="NASABG">NASABG</option>
+	<option value="NAT ARBORETUM">NAT ARBORETUM</option>
+	<option value="None Specified">None Specified</option>
+	<option value="Patriots Plaza III">Patriots Plaza III</option>
+	<option value="PC">PC</option>
+	<option value="PORTALSBG">PORTALSBG</option>
+	<option value="REAGANBG">REAGANBG</option>
+	<option value="REPORTERSBG">REPORTERSBG</option>
+	<option value="RIVER-RD">RIVER-RD</option>
+	<option value="RP-C">RP-C</option>
+	<option value="RP-E">RP-E</option>
+	<option value="SCHOOLST">SCHOOLST</option>
+	<option value="SOAGRIBG">SOAGRIBG</option>
+	<option value="WATERFRONT">WATERFRONT</option>
+	<option value="WHITTENBG">WHITTENBG</option>
+	<option value="YATESBG">YATESBG</option>
+
+</select></td>
+					<td width="5%">&nbsp;</td>
+					<td width="10%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan="6">&nbsp;<br>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="6" align="middle">
+						<input type="submit" name="cmdLocate" value="Locate" id="cmdLocate" />&nbsp;
+						<input type="submit" name="cmdReset" value="Reset" id="cmdReset" />
+						
+						</td>
+				</tr>
+				<tr>
+					<td colspan="6">&nbsp;<br>
+					</td>
+				</tr>
+			</table>
+			</td>
+        <td class="shadow_right">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="shadow_bottom"> </td>
+            <td class="shadow_corner"></td>
+        </tr>
+        </table>
+			<br>
+			
+			
+			
+			
+							
+			
+			
+			
+			<center>
+				<font size="-1"><a href="CreatePDF.aspx?query=entire" target="pdf"><b>View</b></a> the 
+					entire directory (PDF).<br>
+					<br>
+					This directory uses the latest information provided by USDA agencies.<br>
+					It is updated on a daily basis or as frequently as the agencies provide
+					<br>
+					information.<br>
+					<br>
+					<b>**</b>Any errors, changes, or omissions should be reported to the 
+					appropriate<br>
+					<b><a href="AgencyDirectoryContacts.htm">telephone directory contact</a>.</b>
+					<br>
+					<a href="http://www.adobe.com/products/acrobat/readstep.html"><img src="common/images/getacro.gif"></a><br>
+					<br>
+					<a href="http://dc-directory.hqnet.usda.gov/pdf/usda_dc_agency.pdf"><b>View the USDA 
+							Washington Metropolitan Agency Directory</b></a>
+					<br>
+					<br>
+					<b>Service provided by WCTS</b> </font>
+			</center>
+		</form>
+		</div>
+		</div>
+	</body>
+</html>

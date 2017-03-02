@@ -1,0 +1,14 @@
+{
+	"Date of capture": "Fri Feb 24 2017 14:27:53 GMT-0600 (CST)",
+	"File formats contained in package": "PDF",
+	"Individual source or seed URL": "https://dc-directory.hqnet.usda.gov/dlsnew/phone.aspx",
+	"Institution facilitating the data capture creation and packaging": "",
+	"Name of package creator": "btdunnette",
+	"Name of resource": "",
+	"Type(s) of content in package": "USDA Washington Metro Area Telephone Directory.",
+	"UUID": "597E9463-B338-47BC-912C-BD9CD4E521D3",
+	"recommended_approach": "PDF of entire directory linked at https://dc-directory.hqnet.usda.gov/dlsnew/CreatePDF.aspx?query=entire \nSearching last name \"A\" yields entire directory on one contiguous page. Could also scrape the entire table—might be cleaner data—contains cells w/discrete fields and data labels (agency, room, building, etc).",
+	"significance": "USDA Washington Metro Area Telephone Directory.",
+	"title": "The USDA Telephone Directory",
+	"url": "https://dc-directory.hqnet.usda.gov/dlsnew/phone.aspx"
+}
