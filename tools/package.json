@@ -1,14 +1,14 @@
 {
-  "name": "tools",
+  "name": "usda-dc-directory-scraper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "scrape.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "babyparse": "^0.4.6",
     "cheerio": "^0.22.0",
